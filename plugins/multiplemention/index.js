@@ -7,6 +7,10 @@
 
     let targetUserIds = [];
 
+    function getRandomSuffix() {
+        return Math.random() < 0.3 ? " =))" : "";
+    }
+
     patcher.before("sendMessage", MessageActions, (args) => {
         const message = args?.[1];
 
@@ -32,7 +36,7 @@
                 .join(" ");
 
             message.content =
-                "# " + cleanContent + " " + targets;
+                "# " + cleanContent + " " + targets + getRandomSuffix();
 
             return;
         }
@@ -44,11 +48,11 @@
                 .join(" ");
 
             message.content =
-                "# " + content + " " + targets;
+                "# " + content + " " + targets + getRandomSuffix();
         } else {
             // Chưa có target
             message.content =
-                "# " + content;
+                "# " + content + getRandomSuffix();
         }
     });
 })();
